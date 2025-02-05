@@ -205,7 +205,7 @@ class ClientController extends Controller
 
         $length = min($length, config('app.datatables.maxRowsPerPage'));
 
-        return response()->json($this->clientRepository->filteredList(
+		$filteredClientsList = $this->clientRepository->filteredList(
             $userId,
             $companyId,
             $columns,
@@ -214,6 +214,8 @@ class ClientController extends Controller
             $start,
             $length,
             $draw
-        ), Response::HTTP_OK);
+        );
+
+        return response()->json($filteredClientsList, Response::HTTP_OK);
     }
 }
